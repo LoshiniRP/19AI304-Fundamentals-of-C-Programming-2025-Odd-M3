@@ -20,7 +20,22 @@ Step 6: Repeat while num > 0:<br>
 Step 7: Display the binary digits in reverse order (from i-1 down to 0).<br>
 Step 8: Stop<br>
 ## Program:
+```
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter a decimal number: ");
+    scanf("%d", &n);
+    if (n == 0) { printf("0"); return 0; }
+    int bin[32], i = 0;
+    while (n > 0) { bin[i++] = n % 2; n /= 2; }
+    for (i--; i >= 0; i--) printf("%d", bin[i]);
+    return 0;
+}
+```
 ## Output:
+<img width="289" height="53" alt="image" src="https://github.com/user-attachments/assets/ab0b92af-2fad-477e-91d3-78d6afdea5d3" />
+
 ## Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -47,7 +62,34 @@ Step 8: Check if the row minimum equals the column maximum:<br>
   Print the saddle point value and its position.<br>
 Step 9: Stop
 ## Program:
+```
+#include <stdio.h>
+int main() {
+    int m,i,j,k,flag=0;
+    printf("Enter order: ");
+    scanf("%d",&m);
+    int a[m][m];
+    for(i=0;i<m;i++)
+        for(j=0;j<m;j++)
+            scanf("%d",&a[i][j]);
+
+    for(i=0;i<m;i++) {
+        int min=a[i][0], col=0;
+        for(j=1;j<m;j++) if(a[i][j]<min){ min=a[i][j]; col=j; }
+        int max=a[0][col];
+        for(k=1;k<m;k++) if(a[k][col]>max) max=a[k][col];
+        if(min==max) {
+            printf("Saddle point at (%d,%d) = %d\n",i,col,min);
+            flag=1;
+        }
+    }
+    if(!flag) printf("No saddle point\n");
+    return 0;
+}
+```
 ## Output:
+<img width="279" height="138" alt="image" src="https://github.com/user-attachments/assets/0890a346-d55a-4e0b-a32b-eac095eb7bec" />
+
 ## Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -68,7 +110,21 @@ Step 8: Terminate the reversed string `d` with the null character `'\0'`.<br>
 Step 9: Print the reversed string.<br>
 Step 10: Stop<br>
 ## Program:
+```
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char s[100];
+    printf("Enter a string: ");
+    scanf("%[^\n]s", s);
+    for (int i = strlen(s)-1; i >= 0; i--)
+        printf("%c", s[i]);
+    return 0;
+}
+```
 ## Output:
+<img width="232" height="61" alt="image" src="https://github.com/user-attachments/assets/3c19adec-a59e-4472-8143-25230a9dea08" />
+
 ## Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -92,7 +148,36 @@ Step 6: For each character `s[i]` in the string (from `i = 0` to `n - 1`):<br>
 Step 7: Repeat Step 6 for all characters.<br>
 Step 8: Stop<br>
 ## Program:
+```
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[100];
+    int visited[256] = {0}, i, j, n, count;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]", s);
+
+    n = strlen(s);
+
+    for (i = 0; i < n; i++) {
+        if (!visited[(unsigned char)s[i]]) {
+            count = 0;
+            for (j = 0; j < n; j++) {
+                if (s[i] == s[j]) count++;
+            }
+            printf("'%c' occurs %d times\n", s[i], count);
+            visited[(unsigned char)s[i]] = 1;
+        }
+    }
+
+    return 0;
+}
+```
 ## Output:
+<img width="237" height="141" alt="image" src="https://github.com/user-attachments/assets/4e5bc0a1-681f-45a1-8c0e-372afd2c39dc" />
+
 ## Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -115,6 +200,22 @@ Step 6: Compare each word with all other words to detect duplicates:<br>
 Step 7: Print all words that are not marked as duplicates.<br>
 Step 8: Stop<br>
 # Program:
+```
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str[200], words[50][50]; int n=0,i,j;
+    printf("Enter a string: ");
+    scanf("%[^\n]s", str);
+    char *p=strtok(str," ");
+    while(p){ strcpy(words[n++],p); p=strtok(NULL," "); }
+    for(i=0;i<n;i++) for(j=i+1;j<n;j++) if(!strcmp(words[i],words[j])) words[j][0]='\0';
+    for(i=0;i<n;i++) if(words[i][0]) printf("%s ",words[i]);
+    return 0;
+}
+```
 # Output:
+<img width="464" height="55" alt="image" src="https://github.com/user-attachments/assets/eb2debc3-1b24-46a6-82e5-d9bcad0b0929" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
